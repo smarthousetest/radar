@@ -102,6 +102,9 @@ class CardCubit extends Cubit<CardState> {
         final posts = (state as CardLoadingState).oldCard;
         posts.addAll(newPosts.results!);
         emit(CardLoadedState(posts));
+      } else {
+        print('stop here');
+        stopLoading = true;
       }
 
       //}

@@ -118,6 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       scrollController
                           .jumpTo(scrollController.position.maxScrollExtent);
                     });
+                    if (isLoading == false) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                     return Container();
                   }
                 }));
