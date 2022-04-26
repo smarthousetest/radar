@@ -14,6 +14,8 @@ class CardLoadingState extends CardState {
 
 class CardInitial extends CardState {}
 
+class CardStop extends CardState {}
+
 class CardLoadedState extends CardState {
   dynamic? loadedCard;
 

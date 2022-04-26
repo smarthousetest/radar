@@ -73,7 +73,7 @@ class CardCubit extends Cubit<CardState> {
   CardCubit(this.cardRepository) : super(CardInitial());
   final CardRepository cardRepository;
   int page = 1;
-  Future<void> fetchBlogers({String pagen = "1"}) async {
+  Future<void> fetchCards({String pagen = "1"}) async {
     if (state is CardLoadingState) return;
     var oldPosts = [];
     bool stopFatch;
@@ -90,10 +90,10 @@ class CardCubit extends Cubit<CardState> {
 
     emit(CardLoadingState(oldPosts, isFirstFetch: page == 1));
 
-    giveBlogers();
+    giveCards();
   }
 
-  Future<void> giveBlogers() async {
+  Future<void> giveCards() async {
     cardRepository.getAllCards(page).then((newPosts) {
       // if (newPosts.isEmpty == false) {
 
@@ -105,13 +105,15 @@ class CardCubit extends Cubit<CardState> {
       } else {
         print('stop here');
         stopLoading = true;
+        emit(CardStop());
+        print("stopLoading2 $stopLoading");
       }
 
       //}
     });
   }
 
-  Future<void> clearBlogers() async {
+  Future<void> clearCards() async {
     emit(CardEmptyState());
   }
 }

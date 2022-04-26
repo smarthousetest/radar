@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (scrollController.position.atEdge) {
         if (scrollController.position.pixels != 0) {
           CardCubit blogersCubit = context.read<CardCubit>();
-          blogersCubit.fetchBlogers(pagen: "scrool");
+          blogersCubit.fetchCards(pagen: "scrool");
         }
       }
     });
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     setupScrollController(context);
     CardCubit cardCubit = context.read<CardCubit>();
-    cardCubit.fetchBlogers();
+    cardCubit.fetchCards();
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -113,17 +113,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     );
                   } else {
-                    print(isLoading);
+                    print(state);
                     Timer(Duration(milliseconds: 300), () {
                       scrollController
                           .jumpTo(scrollController.position.maxScrollExtent);
                     });
-                    if (isLoading == false) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
+                    print("stopLoading $stopLoading");
+                    if (state is CardStop) {
+                      return Text("Конец");
                     }
-                    return Container();
+                    return CircularProgressIndicator();
                   }
                 }));
           },
